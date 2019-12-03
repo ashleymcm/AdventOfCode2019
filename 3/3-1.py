@@ -25,7 +25,7 @@ def calcCoordinates(wire):
     return coords
 
 def addDirCoords(coord, dir):
-    coords = [coord]
+    coords = []
     direction = dir[0]
     length = int(dir[1:])
     x = coord[0]
