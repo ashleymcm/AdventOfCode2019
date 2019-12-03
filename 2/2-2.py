@@ -9,37 +9,36 @@ with open(os.path.join(dirname, "input.txt")) as ints_list:
 def freshInput():
     return ints.copy()
 
-curr_ints = freshInput()
+memory = freshInput()
 correct_output = 19690720
 
 def prepInput(noun, verb):
-    curr_ints[1] = noun
-    curr_ints[2] = verb
+    memory[1] = noun
+    memory[2] = verb
 
 def calcAnswer(noun, verb):
     return noun * 100 + verb
 
-def performAction(pos):
-    print(pos)
-    if curr_ints[pos] == 1:
-        curr_ints[curr_ints[pos + 3]] = curr_ints[curr_ints[pos + 1]] + curr_ints[curr_ints[pos + 2]]
-    elif curr_ints[pos] == 2:
-        curr_ints[curr_ints[pos + 3]] = curr_ints[curr_ints[pos + 1]] * curr_ints[curr_ints[pos + 2]]
+def performAction(address):
+    if memory[address] == 1:
+        memory[memory[address + 3]] = memory[memory[address + 1]] + memory[memory[address + 2]]
+    elif memory[address] == 2:
+        memory[memory[address + 3]] = memory[memory[address + 1]] * memory[memory[address + 2]]
 
 def run():
-    pos = 0
-    while (curr_ints[pos] != 99):
-        performAction(pos)
-        pos += 4
+    address = 0
+    while (memory[address] != 99):
+        performAction(address)
+        address += 4
 
 def findNounAndVerb():
-    for noun in range(99):
-        for verb in range(99):
-            print(noun, verb)
-            curr_ints = freshInput()
+    global memory
+    for noun in range(100):
+        for verb in range(100):
+            memory = freshInput()
             prepInput(noun, verb)
             run()
-            if (curr_ints[0] == correct_output):
+            if (memory[0] == correct_output):
                 return calcAnswer(noun, verb)
 
 print(findNounAndVerb())
