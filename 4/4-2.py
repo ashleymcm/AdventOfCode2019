@@ -25,4 +25,4 @@ for password in range(rangeStart + 1, rangeEnd + 1):
     if doubleDigits(strPassword) and neverDecreases(strPassword):
         possibleMatches.append(password)
 
-print(len(possibleMatches))
+print(len(possibleMatches)) 
